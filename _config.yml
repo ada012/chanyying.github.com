@@ -6,33 +6,17 @@
 name:               "蔡涵镛"
 
 author:
-  facebook:         your-id
-  youtubeUser:      your-id
-  youtubeChannel:   your-id
-  twitter:          your-id
-  github:           your-id
-  stackoverflow:    your-id
-  quora:            your-id
-  linkedin:         your-id
-  pinterest:        your-id
-  googlePlus:       your-id
-  instagram:        your-id
-  reddit:           your-id
-  medium:           your-id
-  tumblr:           your-id
-  email:            your-id@your-email.com
+  twitter:          chanyying
+  github:           chanyying
+  email:            caihanyong@foxmail.com
 
 copyright:
   year:             2017
-  name:             Kiko
+  name:             caihanyong
 
 # Google-analytics
 google-analytics:
   id:               ""
-
-# Disqus
-disqus:
-  id:               "kiko-plus"
 
 # URL
 url:                "caihanyong.me" # the base hostname & protocol for your site
@@ -41,7 +25,6 @@ baseurl:            "http://caihanyong.me" # the subpath of your site, e.g. /blo
 
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:           Asia/Seoul
 permalink:          /:year-:month-:day/:title/
 
 # Pagination
@@ -57,12 +40,10 @@ kramdown:
 nav:
   - name:           "About"
     url:            "/about"
-  - name:           "Archive"
-    url:            "/archive"
   - name:           "Tags"
     url:            "/tags"
   - name:           "Github"
-    url:            "https://github.com/AWEEKJ/Kiko-plus"
+    url:            "https://github.com/chanyying"
 
 # Sass
 sass:
