@@ -3,7 +3,7 @@ layout: post
 title: 常用的git命令
 description: ""
 date: 2014-11-09
-tags: [React]
+tags: [git]
 comments: true
 share: true
 ---
