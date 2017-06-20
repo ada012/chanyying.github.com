@@ -2,12 +2,12 @@
 layout: post
 title: ReactJS入门知识
 description: ""
-modified: 2015-04-23
+date: 2015-04-23
 tags: [React]
-image:
-  feature: abstract-1.jpg
-  credit: dargadgetz
+comments: true
+share: true
 ---
+
 ### 首先需要先引入两个文件
 {% highlight html %}
 <script src="react.js"></script>
