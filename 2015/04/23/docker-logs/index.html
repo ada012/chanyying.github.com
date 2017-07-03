@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="React," />
+  <meta name="keywords" content="docker," />
 
 
 
@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="引入123&amp;lt;script src=&quot;react.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script src=&quot;JSXTransformer.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;div id=&quot;example&quot;&amp;gt;&amp;lt;/div&amp;gt; 使用12345&amp;lt;script type=&quot;text/jsx&quot;&amp;gt;    React.render(    &amp;lt">
-<meta name="keywords" content="React">
+<meta name="description" content="参数说明1234567$ docker logs [OPTIONS] CONTAINER  Options:        --details        显示更多的信息    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志        --since string   显示自具体某个时间或时间段的日志        --tail string    从日志">
+<meta name="keywords" content="docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReactJS入门知识">
-<meta property="og:url" content="http://caihanyong.me/2015/04/23/react-start/index.html">
+<meta property="og:title" content="从敲下docker logs开始理解docker日志原理">
+<meta property="og:url" content="http://caihanyong.me/2015/04/23/docker-logs/index.html">
 <meta property="og:site_name" content="蔡涵镛">
-<meta property="og:description" content="引入123&amp;lt;script src=&quot;react.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script src=&quot;JSXTransformer.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;div id=&quot;example&quot;&amp;gt;&amp;lt;/div&amp;gt; 使用12345&amp;lt;script type=&quot;text/jsx&quot;&amp;gt;    React.render(    &amp;lt">
-<meta property="og:updated_time" content="2017-07-03T09:39:24.000Z">
+<meta property="og:description" content="参数说明1234567$ docker logs [OPTIONS] CONTAINER  Options:        --details        显示更多的信息    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志        --since string   显示自具体某个时间或时间段的日志        --tail string    从日志">
+<meta property="og:updated_time" content="2017-07-03T16:18:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReactJS入门知识">
-<meta name="twitter:description" content="引入123&amp;lt;script src=&quot;react.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script src=&quot;JSXTransformer.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;div id=&quot;example&quot;&amp;gt;&amp;lt;/div&amp;gt; 使用12345&amp;lt;script type=&quot;text/jsx&quot;&amp;gt;    React.render(    &amp;lt">
+<meta name="twitter:title" content="从敲下docker logs开始理解docker日志原理">
+<meta name="twitter:description" content="参数说明1234567$ docker logs [OPTIONS] CONTAINER  Options:        --details        显示更多的信息    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志        --since string   显示自具体某个时间或时间段的日志        --tail string    从日志">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://caihanyong.me/2015/04/23/react-start/"/>
+  <link rel="canonical" href="http://caihanyong.me/2015/04/23/docker-logs/"/>
 
 
 
 
 
-  <title>ReactJS入门知识 | 蔡涵镛</title>
+  <title>从敲下docker logs开始理解docker日志原理 | 蔡涵镛</title>
   
 
 
@@ -275,7 +275,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://caihanyong.me/2015/04/23/react-start/">
+    <link itemprop="mainEntityOfPage" href="http://caihanyong.me/2015/04/23/docker-logs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="caihanyong">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ReactJS入门知识</h1>
+          <h1 class="post-title" itemprop="name headline">从敲下docker logs开始理解docker日志原理</h1>
         
 
         <div class="post-meta">
@@ -339,20 +339,28 @@
       
 
       
-        <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"react.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script src=<span class="string">"JSXTransformer.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;div id=<span class="string">"example"</span>&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/jsx"</span>&gt;</div><div class="line">    React.render(</div><div class="line">    &lt;h1&gt;Hello,world!&lt;/h1&gt;,</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>));</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>上边的JSXTransformer.js文件之所以引入，是为了转换type=”text/jsx”文件为javascript代码的。<br>如果你已经jsx了上边所需要的功能代码，就可以不引入JSXTransformer.js文件。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/jsx"</span>&gt;</div><div class="line"><span class="comment">// 写到另外的js文件中并jsx --watch之后，引入的时候不能这样引入：</span></div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/jsx"</span> src=<span class="string">"*.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>因为此js文件已经是javascript代码了，就不需要type=”text/jsx”语句去格式化了。</p>
-<p>也并不能 类似的用法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"build/JSXTransformer.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">"text/jsx"</span> src=<span class="string">"src/helloworld.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>JSXTransformer.js解析的必须是页面内的 type=”text/jsx”代码</p>
-<h2 id="组件传递："><a href="#组件传递：" class="headerlink" title="组件传递："></a>组件传递：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Box=React.createClass(&#123;</div><div class="line">    <span class="attr">render</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="keyword">return</span> (</div><div class="line">         &lt;div className="Box"&gt;</div><div class="line">         &lt;h1&gt;评论：&lt;/h1&gt;</div><div class="line">            &lt;BoxList /&gt;</div><div class="line">         &lt;/div&gt;</div><div class="line">      );</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> BoxList=React.createClass(&#123;</div><div class="line">    <span class="attr">render</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="keyword">return</span> (</div><div class="line">        &lt;div className="BoxList"&gt;</div><div class="line">          &lt;Comment author="Pete Hunt"&gt;This is one comment&lt;/Comment&gt;</div><div class="line">          &lt;Comment author="Jordan Walke"&gt;This is *another* comment&lt;/Comment&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">      );</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> Comment=React.createClass(&#123;</div><div class="line">    <span class="attr">render</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="keyword">return</span>(</div><div class="line">        &lt;div className="comment"&gt;</div><div class="line">          &lt;h2 className="commentAuthor"&gt;</div><div class="line">            &#123;this.props.author&#125;</div><div class="line">          &lt;/h2&gt;</div><div class="line">          &#123;this.props.children&#125;</div><div class="line">        &lt;/div&gt;</div><div class="line">      )</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h2><p>访问组件的属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">this.props</div><div class="line">//是自下而上的，由里到外的</div></pre></td></tr></table></figure></p>
-<p>以上边的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="keyword">this</span>.props.author&#125;</div></pre></td></tr></table></figure></p>
-<p>将在本层显示出上一层的author属性<br>任何内嵌的元素作为<br>  this.props.children</p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>var定义的组件名称首字母，必须大写，例如：Box<br>除了要渲染为DOM的var变量用&lt;/&gt;之外，输出内容用{}<br>var 定义变量必须在作用域以内<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">render:function()&#123;</div><div class="line">    var a=...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ docker logs [OPTIONS] CONTAINER</div><div class="line">  Options:</div><div class="line">        --details        显示更多的信息</div><div class="line">    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志</div><div class="line">        --since string   显示自具体某个时间或时间段的日志</div><div class="line">        --tail string    从日志末尾显示多少行日志， 默认是all</div><div class="line">    -t, --timestamps     显示时间戳</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker logs <span class="number">26</span>b12d17fefc</div><div class="line">  nohup: appending output to <span class="string">'nohup.out'</span></div><div class="line">  nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker logs -t <span class="number">26</span>b12d17fefc</div><div class="line">  <span class="number">2017</span>-<span class="number">07</span>-<span class="number">03</span>T12:<span class="number">12</span>:<span class="number">29.909710295</span>Z nohup: appending output to <span class="string">'nohup.out'</span></div><div class="line">  <span class="number">2017</span>-<span class="number">07</span>-<span class="number">03</span>T13:<span class="number">58</span>:<span class="number">54.232003809</span>Z nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker logs --tail <span class="number">1</span> <span class="number">26</span>b12d17fefc</div><div class="line">  nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker logs -t --tail <span class="number">1</span> <span class="number">26</span>b12d17fefc</div><div class="line">  <span class="number">2017</span>-<span class="number">07</span>-<span class="number">03</span>T13:<span class="number">58</span>:<span class="number">54.232003809</span>Z nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ docker logs --since 30m 26b12d17fefc</div><div class="line">  nohup: appending output to &apos;nohup.out&apos;</div><div class="line">$ docker logs -t --since=&quot;2017-07-03T13:58:54.232003809Z&quot; 26b12d17fefc</div><div class="line">  2017-07-03T13:58:54.232003809Z nohup: appending output to &apos;nohup.out&apos;</div><div class="line">$ docker logs -t --since=&quot;2017-07-03T12:12:29.909710295Z&quot; 26b12d17fefc</div><div class="line">  2017-07-03T12:12:29.909710295Z nohup: appending output to &apos;nohup.out&apos;</div><div class="line">  2017-07-03T13:58:54.232003809Z nohup: appending output to &apos;nohup.out&apos;</div></pre></td></tr></table></figure>
+<h2 id="容器日志的输出形式"><a href="#容器日志的输出形式" class="headerlink" title="容器日志的输出形式"></a>容器日志的输出形式</h2><ul>
+<li>stdout 标准输出</li>
+<li>stderr 标准错误</li>
+<li>以json格式存放在容器对于到日志文件中</li>
+</ul>
+<h2 id="docker日志内容类型"><a href="#docker日志内容类型" class="headerlink" title="docker日志内容类型"></a>docker日志内容类型</h2><ul>
+<li>docker自身运行时Daemon的日志内容</li>
+<li>docker容器的日志内容</li>
+</ul>
+<p>我们如何查看容器运行时，容器里面运行的应用的日志呢？</p>
+<p>一般情况下，容器日志存放在 /var/lib/docker/containers 目录下，</p>
+<h2 id="docker-logs的实现原理"><a href="#docker-logs的实现原理" class="headerlink" title="docker logs的实现原理"></a>docker logs的实现原理</h2><blockquote>
+<p>“Docker Daemon是Docker架构中一个常驻在后台的系统进程，它在后台启动了一个Server，Server负责接受Docker Client发送的请求；接受请求后，Server通过路由与分发调度，找到相应的Handler来执行请求。–《Docker源码分析》”</p>
+</blockquote>
+<p>当我们输入docker logs的时候会转化为Docker Client向Docker Daemon发起请求，Docker Daemon 在运行容器时会去创建一个协程(goroutine)，绑定了整个容器内所有进程的标准输出文件描述符，因此容器内应用的所有只要是标准输出日志，都会被 goroutine 接收，Docker Daemon会根据容器id和日志类型读取日志内容，最终会输出到用户终端上并且通过json格式存放在/var/lib/docker/containers目录下，</p>
+<h2 id="容器日志文件的生命周期"><a href="#容器日志文件的生命周期" class="headerlink" title="容器日志文件的生命周期"></a>容器日志文件的生命周期</h2><p>docker logs是跟随容器而产生的，如果删除了某个容器，相应的日志文件也会随着被删除</p>
 
       
     </div>
@@ -382,7 +390,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
         </div>
       
@@ -395,8 +403,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/11/09/git-common-commands/" rel="next" title="常用的git命令">
-                <i class="fa fa-chevron-left"></i> 常用的git命令
+              <a href="/2015/04/23/react-start/" rel="next" title="ReactJS入门知识">
+                <i class="fa fa-chevron-left"></i> ReactJS入门知识
               </a>
             
           </div>
@@ -404,10 +412,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/04/23/docker-logs/" rel="prev" title="从敲下docker logs开始理解docker日志原理">
-                从敲下docker logs开始理解docker日志原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -547,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件传递："><span class="nav-number">3.</span> <span class="nav-text">组件传递：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释："><span class="nav-number">4.</span> <span class="nav-text">名词解释：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意："><span class="nav-number">5.</span> <span class="nav-text">注意：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数说明"><span class="nav-number">1.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器日志的输出形式"><span class="nav-number">3.</span> <span class="nav-text">容器日志的输出形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker日志内容类型"><span class="nav-number">4.</span> <span class="nav-text">docker日志内容类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-logs的实现原理"><span class="nav-number">5.</span> <span class="nav-text">docker logs的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器日志文件的生命周期"><span class="nav-number">6.</span> <span class="nav-text">容器日志文件的生命周期</span></a></li></ol></div>
             
 
           </div>
