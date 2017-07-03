@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git," />
+  <meta name="keywords" content="docker," />
 
 
 
@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="常见命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011">
-<meta name="keywords" content="git">
+<meta name="description" content="参数说明1234567$ docker logs [OPTIONS] CONTAINER  Options:        --details        显示更多的信息    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志        --since string   显示自具体某个时间或时间段的日志        --tail string    从日志">
+<meta name="keywords" content="docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用的git命令">
-<meta property="og:url" content="http://caihanyong.me/2014/11/09/git-common-commands/index.html">
+<meta property="og:title" content="从敲下docker logs开始理解docker日志原理">
+<meta property="og:url" content="http://caihanyong.me/2017/07/03/docker-logs/index.html">
 <meta property="og:site_name" content="蔡涵镛">
-<meta property="og:description" content="常见命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011">
-<meta property="og:updated_time" content="2017-07-03T09:30:12.000Z">
+<meta property="og:description" content="参数说明1234567$ docker logs [OPTIONS] CONTAINER  Options:        --details        显示更多的信息    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志        --since string   显示自具体某个时间或时间段的日志        --tail string    从日志">
+<meta property="og:updated_time" content="2017-07-03T16:25:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用的git命令">
-<meta name="twitter:description" content="常见命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011">
+<meta name="twitter:title" content="从敲下docker logs开始理解docker日志原理">
+<meta name="twitter:description" content="参数说明1234567$ docker logs [OPTIONS] CONTAINER  Options:        --details        显示更多的信息    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志        --since string   显示自具体某个时间或时间段的日志        --tail string    从日志">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://caihanyong.me/2014/11/09/git-common-commands/"/>
+  <link rel="canonical" href="http://caihanyong.me/2017/07/03/docker-logs/"/>
 
 
 
 
 
-  <title>常用的git命令 | 蔡涵镛</title>
+  <title>从敲下docker logs开始理解docker日志原理 | 蔡涵镛</title>
   
 
 
@@ -255,7 +255,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://caihanyong.me/2014/11/09/git-common-commands/">
+    <link itemprop="mainEntityOfPage" href="http://caihanyong.me/2017/07/03/docker-logs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="caihanyong">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">常用的git命令</h1>
+          <h1 class="post-title" itemprop="name headline">从敲下docker logs开始理解docker日志原理</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-11-09T00:00:00+08:00">
-                2014-11-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T00:00:00+08:00">
+                2017-07-03
               </time>
             
 
@@ -319,7 +319,29 @@
       
 
       
-        <h2 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line">git status</div><div class="line">// 查看状态</div><div class="line"></div><div class="line">git commit</div><div class="line">// 可提交状态（本地保存）</div><div class="line"></div><div class="line">git commit -a</div><div class="line">// 提交全部，把所有的changes变为commit</div><div class="line"></div><div class="line">git commit -a -m&quot;这里填写你修改的提示语句&quot;</div><div class="line">// 这个命令可以跳过commit -a 之后的弹出编辑提示语句的编辑器</div><div class="line"></div><div class="line">gitk</div><div class="line">// 图形化形式</div><div class="line"></div><div class="line">git add D:</div><div class="line">// 添加某一个文件</div><div class="line"></div><div class="line">git add -A</div><div class="line">// 如果本地存在多份新添加的文件，就使用这个，不用一个一个add</div><div class="line"></div><div class="line">git commit -a --amend</div><div class="line">// 把本次的commit追加到上次的commit</div><div class="line"></div><div class="line">git checkout -b issue88</div><div class="line">// 创建并切换到issue88分支</div><div class="line"></div><div class="line">git branch</div><div class="line">// 查看本地分支</div><div class="line"></div><div class="line">git branch -a</div><div class="line">// 查看所有分支 </div><div class="line"></div><div class="line">git checkout master</div><div class="line">// 切换到master分支 </div><div class="line"></div><div class="line">git fetch origin issue88</div><div class="line">// 从服务器端下载最新的文件</div><div class="line"></div><div class="line">git rebase issue88</div><div class="line">// 把最新的文件合并到本地的issue88</div><div class="line"></div><div class="line">git push origin issue88</div><div class="line">// 把本地的issue88的commit上传到服务器端</div><div class="line">git pull origin master</div><div class="line">// 从服务器端下载master最新文件到本地</div><div class="line"></div><div class="line">git diff</div><div class="line">// 比较当前文件和暂存区文件不同情况</div><div class="line"></div><div class="line">git merge &lt;branch&gt;</div><div class="line">// 将branch分支合并到当前目录所在分支</div><div class="line"></div><div class="line">git clone</div><div class="line">// 从服务端下载整个库到本地</div><div class="line"></div><div class="line">git help &lt;command&gt;</div><div class="line">// 显示command的帮助</div><div class="line"></div><div class="line">分支问题：</div><div class="line">git branch</div><div class="line">// 查看本地分支</div><div class="line"></div><div class="line">git branch -r</div><div class="line">// 查看远程分支</div><div class="line"></div><div class="line">git push origin :branch</div><div class="line">// 删除远程分支</div><div class="line"></div><div class="line">git branch -d branch</div><div class="line">//删除本地分支</div><div class="line"></div><div class="line">git checkout -- routes.js</div><div class="line">// 使用git checkout可以丢弃掉本地的改动，然后使用git pull去拿server上的最新更新。</div><div class="line">比如，我想丢弃一个文件的所有改动, 然后再使用git pull，就可以拿到server上的版本的代码了。</div><div class="line"></div><div class="line">git reset HEAD^</div><div class="line">// 回退到上一次的commit</div><div class="line"></div><div class="line">git reset --hard HEAD</div><div class="line">// 回退到本次pull之前，(撤销本次pull)</div><div class="line"></div><div class="line">git reset --mixed</div><div class="line">// 在一个分支上修改文件，然后线上已经更新了，使用git stash将修改的文件保存到缓存区，在checkout到master去pull了一次，然后就忘记了切换到之前分支上git stash pop，在master上就git stash pop了，结果冲突了。在切换的时候出现needs merge的错误，然后谷歌了一下。。。</div><div class="line">本地修改了东西git stash的时候出现 needs merge的情况，pull不了，stash不了，解决办法使用</div><div class="line">git marge再revert，撤销revert的方法</div><div class="line"></div><div class="line">git revert HEAD</div><div class="line">// 撤销前一次 commit</div><div class="line"></div><div class="line">git revert HEAD^</div><div class="line">// 撤销前前一次 commit</div><div class="line"></div><div class="line">git revert commit</div><div class="line">//（比如：fa042ce57ebbe5bb9c8db709f719cec2c58ee7ff）撤销指定的版本，撤销也会作为一次提交进行保存。</div><div class="line">然后git status查看状态，就解除冲突了，不会影响到之前的任何更改</div><div class="line"></div><div class="line">git reset --hard origin/master</div><div class="line">// 删除全部本地的修改</div><div class="line"></div><div class="line">git remote prune origin</div><div class="line">// 同步远程分支到本地</div></pre></td></tr></table></figure>
+        <h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ docker logs [OPTIONS] CONTAINER</div><div class="line">  Options:</div><div class="line">        --details        显示更多的信息</div><div class="line">    -f, --follow         跟踪日志输出，最后一行为当前时间戳的日志</div><div class="line">        --since string   显示自具体某个时间或时间段的日志</div><div class="line">        --tail string    从日志末尾显示多少行日志， 默认是all</div><div class="line">    -t, --timestamps     显示时间戳</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker logs <span class="number">26</span>b12d17fefc</div><div class="line">  nohup: appending output to <span class="string">'nohup.out'</span></div><div class="line">  nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker logs -t <span class="number">26</span>b12d17fefc</div><div class="line">  <span class="number">2017</span>-<span class="number">07</span>-<span class="number">03</span>T12:<span class="number">12</span>:<span class="number">29.909710295</span>Z nohup: appending output to <span class="string">'nohup.out'</span></div><div class="line">  <span class="number">2017</span>-<span class="number">07</span>-<span class="number">03</span>T13:<span class="number">58</span>:<span class="number">54.232003809</span>Z nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker logs --tail <span class="number">1</span> <span class="number">26</span>b12d17fefc</div><div class="line">  nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker logs -t --tail <span class="number">1</span> <span class="number">26</span>b12d17fefc</div><div class="line">  <span class="number">2017</span>-<span class="number">07</span>-<span class="number">03</span>T13:<span class="number">58</span>:<span class="number">54.232003809</span>Z nohup: appending output to <span class="string">'nohup.out'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ docker logs --since 30m 26b12d17fefc</div><div class="line">  nohup: appending output to &apos;nohup.out&apos;</div><div class="line">$ docker logs -t --since=&quot;2017-07-03T13:58:54.232003809Z&quot; 26b12d17fefc</div><div class="line">  2017-07-03T13:58:54.232003809Z nohup: appending output to &apos;nohup.out&apos;</div><div class="line">$ docker logs -t --since=&quot;2017-07-03T12:12:29.909710295Z&quot; 26b12d17fefc</div><div class="line">  2017-07-03T12:12:29.909710295Z nohup: appending output to &apos;nohup.out&apos;</div><div class="line">  2017-07-03T13:58:54.232003809Z nohup: appending output to &apos;nohup.out&apos;</div></pre></td></tr></table></figure>
+<h2 id="容器日志的输出形式"><a href="#容器日志的输出形式" class="headerlink" title="容器日志的输出形式"></a>容器日志的输出形式</h2><ul>
+<li>stdout 标准输出</li>
+<li>stderr 标准错误</li>
+<li>以json格式存放在容器对于到日志文件中</li>
+</ul>
+<h2 id="docker日志内容类型"><a href="#docker日志内容类型" class="headerlink" title="docker日志内容类型"></a>docker日志内容类型</h2><ul>
+<li>docker自身运行时Daemon的日志内容</li>
+<li>docker容器的日志内容</li>
+</ul>
+<p>我们如何查看容器运行时，容器里面运行的应用的日志呢？</p>
+<p>一般情况下，容器日志存放在 /var/lib/docker/containers 目录下，</p>
+<h2 id="docker-logs的实现原理"><a href="#docker-logs的实现原理" class="headerlink" title="docker logs的实现原理"></a>docker logs的实现原理</h2><blockquote>
+<p>“Docker Daemon是Docker架构中一个常驻在后台的系统进程，它在后台启动了一个Server，Server负责接受Docker Client发送的请求；接受请求后，Server通过路由与分发调度，找到相应的Handler来执行请求。–《Docker源码分析》”</p>
+</blockquote>
+<p>当我们输入docker logs的时候会转化为Docker Client向Docker Daemon发起请求，Docker Daemon 在运行容器时会去创建一个协程(goroutine)，绑定了整个容器内所有进程的标准输出文件描述符，因此容器内应用的所有只要是标准输出日志，都会被 goroutine 接收，Docker Daemon会根据容器id和日志类型读取日志内容，最终会输出到用户终端上并且通过json格式存放在/var/lib/docker/containers目录下，</p>
+<h2 id="容器日志文件的生命周期"><a href="#容器日志文件的生命周期" class="headerlink" title="容器日志文件的生命周期"></a>容器日志文件的生命周期</h2><p>docker logs是跟随容器而产生的，如果删除了某个容器，相应的日志文件也会随着被删除</p>
+
       
     </div>
 
@@ -348,7 +370,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
         </div>
       
@@ -361,15 +383,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2015/04/23/react-start/" rel="next" title="ReactJS入门知识">
+                <i class="fa fa-chevron-left"></i> ReactJS入门知识
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/04/23/react-start/" rel="prev" title="ReactJS入门知识">
-                ReactJS入门知识 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -509,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见命令"><span class="nav-number">1.</span> <span class="nav-text">常见命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数说明"><span class="nav-number">1.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器日志的输出形式"><span class="nav-number">3.</span> <span class="nav-text">容器日志的输出形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker日志内容类型"><span class="nav-number">4.</span> <span class="nav-text">docker日志内容类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-logs的实现原理"><span class="nav-number">5.</span> <span class="nav-text">docker logs的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器日志文件的生命周期"><span class="nav-number">6.</span> <span class="nav-text">容器日志文件的生命周期</span></a></li></ol></div>
             
 
           </div>
