@@ -335,12 +335,10 @@
 <li>docker自身运行时Daemon的日志内容</li>
 <li>docker容器的日志内容</li>
 </ul>
-<p>我们如何查看容器运行时，容器里面运行的应用的日志呢？</p>
-<p>一般情况下，容器日志存放在 /var/lib/docker/containers 目录下，</p>
 <h2 id="docker-logs的实现原理"><a href="#docker-logs的实现原理" class="headerlink" title="docker logs的实现原理"></a>docker logs的实现原理</h2><blockquote>
 <p>“Docker Daemon是Docker架构中一个常驻在后台的系统进程，它在后台启动了一个Server，Server负责接受Docker Client发送的请求；接受请求后，Server通过路由与分发调度，找到相应的Handler来执行请求。–《Docker源码分析》”</p>
 </blockquote>
-<p>当我们输入docker logs的时候会转化为Docker Client向Docker Daemon发起请求，Docker Daemon 在运行容器时会去创建一个协程(goroutine)，绑定了整个容器内所有进程的标准输出文件描述符，因此容器内应用的所有只要是标准输出日志，都会被 goroutine 接收，Docker Daemon会根据容器id和日志类型读取日志内容，最终会输出到用户终端上并且通过json格式存放在/var/lib/docker/containers目录下，</p>
+<p>当我们输入docker logs的时候会转化为Docker Client向Docker Daemon发起请求,Docker Daemon 在运行容器时会去创建一个协程(goroutine)，绑定了整个容器内所有进程的标准输出文件描述符。因此容器内应用的所有只要是标准输出日志，都会被 goroutine 接收，Docker Daemon会根据容器id和日志类型读取日志内容，最终会输出到用户终端上并且通过json格式存放在/var/lib/docker/containers目录下。</p>
 <h2 id="容器日志文件的生命周期"><a href="#容器日志文件的生命周期" class="headerlink" title="容器日志文件的生命周期"></a>容器日志文件的生命周期</h2><p>docker logs是跟随容器而产生的，如果删除了某个容器，相应的日志文件也会随着被删除</p>
 
           
