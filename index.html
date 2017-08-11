@@ -252,6 +252,154 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://caihanyong.me/2017/07/12/weixin-pay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="caihanyong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡涵镛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/12/weixin-pay/" itemprop="url">微信支付中遇到过哪些坑？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T00:00:00+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="微信内"><a href="#微信内" class="headerlink" title="微信内"></a>微信内</h2><h3 id="基于jssdk的调用"><a href="#基于jssdk的调用" class="headerlink" title="基于jssdk的调用"></a>基于jssdk的调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 需要引入SDK</div><div class="line">wx.chooseWXPay(&#123;</div><div class="line">    timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符</div><div class="line">    nonceStr: &apos;&apos;, // 支付签名随机串，不长于 32 位</div><div class="line">    package: &apos;&apos;, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）</div><div class="line">    signType: &apos;&apos;, // 签名方式，默认为&apos;SHA1&apos;，使用新版支付需传入&apos;MD5&apos;</div><div class="line">    paySign: &apos;&apos;, // 支付签名</div><div class="line">    success: function (res) &#123;</div><div class="line">        // 支付成功后的回调函数</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="基于getBrandWCPayRequest的方式"><a href="#基于getBrandWCPayRequest的方式" class="headerlink" title="基于getBrandWCPayRequest的方式"></a>基于getBrandWCPayRequest的方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">// 不需要引入SDK</div><div class="line">const wxPay = (data, resolve, reject) =&gt; &#123;</div><div class="line">  function onBridgeReady () &#123;</div><div class="line">    window.WeixinJSBridge.invoke(</div><div class="line">      &apos;getBrandWCPayRequest&apos;, data.payInfo,</div><div class="line">      function (res) &#123;</div><div class="line">        if (res.err_msg === &apos;get_brand_wcpay_request:ok&apos;) &#123;</div><div class="line">          resolve(&#123;res, data&#125;)</div><div class="line">          return</div><div class="line">        &#125;</div><div class="line">        if (res.err_msg === &apos;get_brand_wcpay_request:cancel&apos; || res.err_msg === &apos;get_brand_wcpay_request:fail&apos;) &#123;</div><div class="line">          reject(&#123;res, data&#125;)</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 如果是微信支付</div><div class="line">  if (typeof window.WeixinJSBridge === &apos;undefined&apos;) &#123;</div><div class="line">    if (document.addEventListener) &#123;</div><div class="line">      document.addEventListener(&apos;WeixinJSBridgeReady&apos;, onBridgeReady, false)</div><div class="line">    &#125; else if (document.attachEvent) &#123;</div><div class="line">      document.attachEvent(&apos;WeixinJSBridgeReady&apos;, onBridgeReady)</div><div class="line">      document.attachEvent(&apos;onWeixinJSBridgeReady&apos;, onBridgeReady)</div><div class="line">    &#125;</div><div class="line">  &#125; else &#123;</div><div class="line">    onBridgeReady()</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">export default data =&gt; &#123;</div><div class="line">  return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">    wxPay(data, resolve, reject)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>公众号后台添加支付目录<br>目录以<code>/</code>结尾，微信支付会以最后一个<code>／</code>为当前目录调起支付<br>如果配置的域名为：www.abc.com/<br>则只能在 www.abc.com/aa，www.abc.com/bb, …下进行支付<br>而不能在www.abc.com/aa/下支付</li>
+<li>添加业务域名（否则会弹出，防欺骗盗号，请勿输入密码）</li>
+</ul>
+<h2 id="微信外"><a href="#微信外" class="headerlink" title="微信外"></a>微信外</h2><h3 id="网络环境未能通过安全验证，请稍后再试"><a href="#网络环境未能通过安全验证，请稍后再试" class="headerlink" title="网络环境未能通过安全验证，请稍后再试"></a>网络环境未能通过安全验证，请稍后再试</h3><blockquote>
+<p>商户侧统一下单传的终端IP(spbill_create_ip)与用户实际调起支付时微信侧检测到的终端IP不一致导致的</p>
+</blockquote>
+<ul>
+<li>造成此问题的原因：<br>1、绑定host引起<br>2、来回切换线上和测试环境，以及本地环境导致的</li>
+<li>解决办法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># nginx 配置</div><div class="line">proxy_set_header Host $host;</div><div class="line">proxy_set_header X-Real-IP $remote_addr;</div><div class="line">proxy_set_header X-Real-Port $remote_port;</div><div class="line">proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="商家参数格式有误，请联系商家解决"><a href="#商家参数格式有误，请联系商家解决" class="headerlink" title="商家参数格式有误，请联系商家解决"></a>商家参数格式有误，请联系商家解决</h3><blockquote>
+<p>调起H5支付的referer为空或者和支付域名不一致导致的</p>
+<ul>
+<li>造成此问题的原因：<br>1、直接访问本地服务调支付，缺少referer<br>2、绑定的服务域名和支付域名不一致</li>
+</ul>
+</blockquote>
+<ul>
+<li>解决办法：<br>将服务通过反向代理到支付域名，设置支付目录到域名</li>
+</ul>
+<h3 id="商家存在未配置的参数，请联系商家解决"><a href="#商家存在未配置的参数，请联系商家解决" class="headerlink" title="商家存在未配置的参数，请联系商家解决"></a>商家存在未配置的参数，请联系商家解决</h3><blockquote>
+<p>1、当前调起H5支付的域名（微信侧从referer中获取）与申请H5支付时提交的授权域名不一致，如需添加或修改授权域名，请联系我们的商务同事操作<br>  2、如果设置了回跳地址redirect_url，请确认设置的回跳地址的域名与申请H5支付时提交的授权域名是否一致</p>
+</blockquote>
+<ul>
+<li>造成此问题的原因：<br>1、redirect_url的referer，也就是上一个问题说到的，需要与支付域名保持一致的referer<br>2、redirect_url的encode，只能encode一次，如果产生两次仍会报错此问题<br>3、redirect_url的参数如果是连接，如果在支付回调地址中带有url类参数，不能有具体的链接信息<br>4、联系微信商务，配置mweb(h5支付域名)</li>
+<li>解决办法：<br>1、referer在支付内保持一致<br>2、由于有些浏览器自动encode，无论redirect_url中是否encode，都先decode之后再进行encode传递给微信支付<br>3、拦截地址参数中存在的<code>/</code>，在服务中进行转换</li>
+</ul>
+<h3 id="h5无法确定支付状态"><a href="#h5无法确定支付状态" class="headerlink" title="h5无法确定支付状态"></a>h5无法确定支付状态</h3><ul>
+<li>用户点击“取消支付“或支付完成后点“完成”按钮。因为无法保证页面回跳时，支付流程已结束</li>
+<li>用户在调起h5支付后，触发一个自定义回调，让用户在回到此页面时，手动触发获取支付状态，进而判断成功与否</li>
+</ul>
+<h3 id="未解决的问题"><a href="#未解决的问题" class="headerlink" title="未解决的问题"></a>未解决的问题</h3><ul>
+<li>如果用户手机中装有两个浏览器，支付成功或取消支付后，微信会自动调起默认浏览器，但用户可能是从第三方浏览器中发起支付<br>这样造成的问题，无法触发上一个问题的自定义回调</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://caihanyong.me/2017/07/03/docker-logs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -655,7 +803,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -668,7 +816,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
